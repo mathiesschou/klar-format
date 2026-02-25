@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "crates/klar-ast",
+    "crates/klar-parser",
+]
+resolver = "2"
