@@ -9,7 +9,8 @@ fn document_can_hold_blocks() {
                 inlines: vec![Inline::Text("Hello".to_string())],
             },
             Block::Paragraph(vec![Inline::Text("World".to_string())]),
+            Block::Paragraph(vec![Inline::Bold("Bold".to_string())]),
         ],
     };
-    assert_eq!(doc.blocks.len(), 2);
+    assert_eq!(doc.blocks.len(), 3);
 }
