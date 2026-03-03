@@ -8,12 +8,14 @@ pub fn parse_inlines(input: &str) -> Vec<Inline> {
         if let Some(star_pos) = remaining.find('*') {
             // Check if there's a closing star first
             if let Some(close_pos) = remaining[star_pos + 1..].find('*') {
-                // Valid bold found
+                // If bold not from position 0, then push normal text until first '*'
                 if star_pos > 0 {
                     inlines.push(Inline::Text(remaining[..star_pos].to_string()));
                 }
+                // Ranges is excluding "end" in slices [start..end]
                 let bold_text = &remaining[star_pos + 1..star_pos + 1 + close_pos];
                 inlines.push(Inline::Bold(bold_text.to_string()));
+                // Start from after second '*' and take remaining text
                 remaining = &remaining[star_pos + 2 + close_pos..];
             } else {
                 // No closing star - treat everything as text
