@@ -93,3 +93,44 @@ fn parse_bold_at_end() {
         }
     );
 }
+
+#[test]
+fn parse_italic() {
+    let result = parse("/hello/");
+    assert_eq!(
+        result,
+        Document {
+            blocks: vec![Block::Paragraph(vec![Inline::Italic("hello".to_string())])]
+        }
+    )
+}
+
+#[test]
+fn parse_italic_with_text_around() {
+    let result = parse("hello /italic/ world");
+    assert_eq!(
+        result,
+        Document {
+            blocks: vec![Block::Paragraph(vec![
+                Inline::Text("hello ".to_string()),
+                Inline::Italic("italic".to_string()),
+                Inline::Text(" world".to_string())
+            ])]
+        }
+    )
+}
+
+#[test]
+fn parse_italic_and_bold() {
+    let result = parse("*bold* and /italic/");
+    assert_eq!(
+        result,
+        Document {
+            blocks: vec![Block::Paragraph(vec![
+                Inline::Bold("bold".to_string()),
+                Inline::Text(" and ".to_string()),
+                Inline::Italic("italic".to_string()),
+            ])]
+        }
+    )
+}

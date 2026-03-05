@@ -13,4 +13,5 @@ pub enum Block {
 pub enum Inline {
     Text(String),
     Bold(String),
+    Italic(String),
 }
