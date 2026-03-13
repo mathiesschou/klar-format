@@ -7,7 +7,7 @@
   };
 
   outputs = { nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDeafultSystem (system:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
       in
@@ -17,7 +17,7 @@
             cargo
             rustc
             rust-analyzer
-            rusfmt
+            rustfmt
             clippy
           ];
         };
